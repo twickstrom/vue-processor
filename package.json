@@ -1,0 +1,35 @@
+{
+  "name": "vue-processor",
+  "description": "A Vue utility to asynchronously process large amounts of data without blocking the UI",
+  "version": "1.0.0",
+  "author": "Tim Wickstrom <tim@wickstrom.me>",
+  "license": "MIT",
+  "maintainers": [
+    "Tim Wickstrom <tim@wickstrom.me> (https://timwickstrom.com)"
+  ],
+  "contributors": [
+    "Tim Wickstrom <tim@wickstrom.me>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twickstrom/vue-processor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/twickstrom/vue-processor/issues"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "vue.js",
+    "vue2",
+    "vue-processor"
+  ],
+  "homepage": "https://github.com/twickstrom/vue-processor",
+  "main": "src/index.js",
+  "dependencies": {
+    "vue": "^2.6.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

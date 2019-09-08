@@ -1,7 +1,7 @@
 {
   "name": "vue-processor",
   "description": "A Vue utility to asynchronously process large amounts of data without blocking the UI",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Tim Wickstrom <tim@wickstrom.me>",
   "license": "MIT",
   "maintainers": [

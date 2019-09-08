@@ -3,13 +3,14 @@ import Vue from 'vue'
 let maxTime = 200
 let delay = 1
 
-const asyncForeach = (array, fn, options) => {
+let asyncForeach = (array, fn, options) => {
   return new Promise((resolve, reject) => {
     let index = 0
     let count = array.length
     let now = () => new Date().getTime()
-    let maxTime = (options || {}).hasOwnProperty('maxTime') ? options.maxTime : maxTime
-    let delay = (options || {}).hasOwnProperty('delay') ? options.delay : delay
+
+    maxTime = (options || {}).hasOwnProperty('maxTime') ? options.maxTime : maxTime
+    delay = (options || {}).hasOwnProperty('delay') ? options.delay : delay
 
     let doChunk = () => {
       let startTime = now()

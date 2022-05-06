@@ -23,7 +23,19 @@ npm i vue-processor
 yarn add vue-processor
 ```
 
-## Default import
+## Default import (Vue 2)
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+import VueProcessor from 'vue-processor'
+
+const app = createApp(App)
+
+app.use(VueProcessor)
+app.mount('#app')
+```
+
+## Default import (Vue 3)
 ```javascript
 import Vue from 'vue'
 import VueProcessor from 'vue-processor'

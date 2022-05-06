@@ -1,43 +1,61 @@
-import Vue from 'vue'
-
-let maxTime = 200
-let delay = 1
-
-let asyncForeach = (array, fn, options) => {
-  return new Promise((resolve, reject) => {
-    let index = 0
-    let count = array.length
-    let now = () => new Date().getTime()
-
-    maxTime = (options || {}).hasOwnProperty('maxTime') ? options.maxTime : maxTime
-    delay = (options || {}).hasOwnProperty('delay') ? options.delay : delay
-
-    let doChunk = () => {
-      let startTime = now()
-
-      while (index < count && (now() - startTime) <= maxTime) {
-        fn(array[index], index, array)
-        ++index
-      }
-
-      if (index < count) {
-        setTimeout(doChunk, delay)
-      } else {
-        resolve(true)
-      }
+const max = {
+  time: 200,
+  delay: 1,
+  get time() {
+    return this.time
+  },
+  set time(ms) {
+    if (ms) {
+      this.time = ms
     }
-
-    doChunk ()
-  })
+  },
+  get delay() {
+    return this.delay
+  },
+  set delay(ms) {
+    if (ms) {
+      this.delay = ms
+    }
+  },
 }
 
+const now = () => new Date().getTime()
+
+const asyncForeach = (array, fn, options) => new Promise((resolve) => {
+  let index = 0
+  const count = array.length
+
+  max.time = (options || {}).maxTime
+  max.delay = (options || {}).delay
+
+  const doChunk = () => {
+    const startTime = now()
+
+    while (index < count && (now() - startTime) <= max.time) {
+      fn(array[index], index, array)
+      index += 1
+    }
+
+    if (index < count) {
+      setTimeout(doChunk, max.delay)
+    } else {
+      resolve(true)
+    }
+  }
+
+  doChunk()
+})
 
 const VueProcessor = {
-  install (Vue, options) {
-    maxTime = (options || {}).hasOwnProperty('maxTime') ? options.maxTime : maxTime
-    delay = (options || {}).hasOwnProperty('delay') ? options.delay : delay
-    Vue.$processor = asyncForeach
-    Vue.prototype.$processor = asyncForeach
+  install(app, options) {
+    max.time = (options || {}).maxTime
+    max.delay = (options || {}).delay
+
+    if ('config' in app && 'globalProperties' in app.config) {
+      app.config.globalProperties.$processor = asyncForeach
+    } else {
+      app.prototype.$processor = asyncForeach
+    }
   }
 }
 
